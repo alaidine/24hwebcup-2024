@@ -9,6 +9,8 @@ import {
 import type { AppProps } from "next/app";
 
 import { Button } from "@/components/ui/button";
+import { FaHome } from "react-icons/fa";
+import { IconContext } from "react-icons";
 
 import {
   NavigationMenu,
@@ -24,15 +26,21 @@ import {
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ClerkProvider {...pageProps}>
-      <NavigationMenu className="bg-gray-800 text-black p-4">
+      <NavigationMenu className="mx-auto bg-gray-800 text-black p-3 rounded-b-xl">
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuLink href="/">
-              <Button variant="outline">Home</Button>
+              <IconContext.Provider
+                value={{ color: "white", className: "text-xl" }}
+              >
+                <div className="px-5">
+                  <FaHome />
+                </div>
+              </IconContext.Provider>
             </NavigationMenuLink>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Button variant="secondary">
+            <Button variant="ghost" className="text-white font-bold">
               <SignedOut>
                 <SignInButton />
               </SignedOut>
@@ -43,7 +51,6 @@ export default function App({ Component, pageProps }: AppProps) {
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
-
       <Component {...pageProps} />
     </ClerkProvider>
   );
