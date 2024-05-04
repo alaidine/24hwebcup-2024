@@ -19,5 +19,6 @@ type Booking = {
   name: string;
   email: string;
   timePeriod: string;
-  destination: string;
+  location: string;
+  timePoint: string;
 };
