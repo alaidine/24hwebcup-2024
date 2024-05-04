@@ -23,35 +23,29 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
 
+function HomeIcon() {
+  return (
+    <IconContext.Provider value={{ color: "white", className: "text-xl" }}>
+      <div className="px-5">
+        <FaHome />
+      </div>
+    </IconContext.Provider>
+  );
+}
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ClerkProvider {...pageProps}>
+    <>
       <NavigationMenu className="mx-auto bg-gray-800 text-black p-3 rounded-b-xl">
         <NavigationMenuList>
           <NavigationMenuItem>
             <NavigationMenuLink href="/">
-              <IconContext.Provider
-                value={{ color: "white", className: "text-xl" }}
-              >
-                <div className="px-5">
-                  <FaHome />
-                </div>
-              </IconContext.Provider>
+              <HomeIcon />
             </NavigationMenuLink>
-          </NavigationMenuItem>
-          <NavigationMenuItem>
-            <Button variant="ghost" className="text-white font-bold">
-              <SignedOut>
-                <SignInButton />
-              </SignedOut>
-              <SignedIn>
-                <UserButton />
-              </SignedIn>
-            </Button>
           </NavigationMenuItem>
         </NavigationMenuList>
       </NavigationMenu>
       <Component {...pageProps} />
-    </ClerkProvider>
+    </>
   );
 }

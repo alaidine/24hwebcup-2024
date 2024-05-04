@@ -1,6 +1,10 @@
 import { useRouter } from "next/router";
 import { TimePeriods } from "@/data/time-periods";
 
+import Link from "next/link";
+
+import { Location } from "@/types";
+
 import * as React from "react";
 import Image from "next/image";
 
@@ -9,6 +13,11 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 export interface Artwork {
   artist: string;
   art: string;
+}
+
+function getLocations(period: string): Location[] {
+  const timePeriod = TimePeriods.find((tp) => tp.name === period);
+  return timePeriod?.locations ?? [];
 }
 
 export const works: Artwork[] = [
@@ -55,13 +64,42 @@ export function ScrollAreaHorizontalDemo() {
   );
 }
 
+function ScrollLocations({ period }: { period: string }) {
+  const locations = getLocations(period);
+  return (
+    <ScrollArea className="w-96 whitespace-nowrap rounded-md border">
+      <div className="flex w-max space-x-4 p-4">
+        {locations.map((location) => (
+          <figure key={location.name} className="shrink-0">
+            <Link href={`/timepoint/${period}/${location.name}`}>
+              <div className="overflow-hidden rounded-md">
+                <Image
+                  src={location.img}
+                  alt={`Photo of ${location.name}`}
+                  className="aspect-[3/4] h-fit w-fit object-cover"
+                  width={300}
+                  height={400}
+                />
+              </div>
+            </Link>
+            <figcaption className="pt-2 text-xs text-muted-foreground">
+              {location.name}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+      <ScrollBar orientation="horizontal" />
+    </ScrollArea>
+  );
+}
+
 export default function SelectedTimePeriod() {
   const router = useRouter();
 
   console.log(router.query);
   return (
     <div className="flex items-center justify-center h-screen">
-      <ScrollAreaHorizontalDemo />
+      <ScrollLocations period={router.query.period as string} />
     </div>
-  )
+  );
 }
