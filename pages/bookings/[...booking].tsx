@@ -48,6 +48,7 @@ type BookingProps = {
 };
 
 export function BookingForm(props: BookingProps) {
+  const router = useRouter();
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof bookingSchema>>({
@@ -74,14 +75,17 @@ export function BookingForm(props: BookingProps) {
       timePoint: props.timePoint,
     };
 
-    toast({
-      title: "Booking",
-      description: "Booking submitted.",
-    });
-
     console.log(bookingInfos);
 
-    addData("bookings", bookingInfos);
+    addData("bookings", bookingInfos)
+      .then(() => {
+        alert("Booking successful!");
+        router.push("/");
+      })
+      .catch((e) => {
+        alert("Something went wrong!");
+        console.error("Error adding document: ", e);
+      });
   }
 
   return (
