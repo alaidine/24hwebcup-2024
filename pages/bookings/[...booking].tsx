@@ -1,11 +1,12 @@
 "use client";
 
 import { useRouter } from "next/router";
-import firebase from "@/firebase/clientApp";
 
 import { Booking } from "@/types";
 
 import { db } from "@/firebase/clientApp";
+
+import { doc, setDoc } from "firebase/firestore";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -56,6 +57,14 @@ export function BookingForm(props: BookingProps) {
     },
   });
 
+  async function addData(collection: string, data: Booking) {
+    try {
+      await setDoc(doc(db, collection, data.name), data);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+  }
+
   function onSubmit(values: z.infer<typeof bookingSchema>) {
     const bookingInfos: Booking = {
       name: values.name,
@@ -71,6 +80,8 @@ export function BookingForm(props: BookingProps) {
     });
 
     console.log(bookingInfos);
+
+    addData("bookings", bookingInfos);
   }
 
   return (
