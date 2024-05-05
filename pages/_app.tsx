@@ -35,7 +35,7 @@ function HomeIcon() {
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
+    <div>
       <NavigationMenu className="mx-auto bg-gray-800 text-black p-3 rounded-b-xl">
         <NavigationMenuList>
           <NavigationMenuItem>
@@ -46,6 +46,6 @@ export default function App({ Component, pageProps }: AppProps) {
         </NavigationMenuList>
       </NavigationMenu>
       <Component {...pageProps} />
-    </>
+    </div>
   );
 }
