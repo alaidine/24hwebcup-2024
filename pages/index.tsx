@@ -59,6 +59,7 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center h-screen">
       <h1 className="text-4xl font-bold">Choose a time period</h1>
       <CarouselSpacing />
+      <h3>Ecoindex 79/100 (B)</h3>
     </div>
   );
 }
