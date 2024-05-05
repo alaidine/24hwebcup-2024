@@ -54,7 +54,8 @@ export default function Timepoint() {
   console.log(times);
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen">
+      <h2 className="text-3xl py-5 font-bold">Choose a Timepoint</h2>
       <ScrollArea className="h-72 w-48 rounded-md border">
         <div className="p-4">
           <h4 className="mb-4 text-sm font-medium leading-none">Timepoints</h4>

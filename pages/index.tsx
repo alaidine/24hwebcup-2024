@@ -56,7 +56,8 @@ function CarouselSpacing() {
 
 export default function Home() {
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen">
+      <h1 className="text-4xl font-bold">Choose a time period</h1>
       <CarouselSpacing />
     </div>
   );

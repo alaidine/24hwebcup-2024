@@ -98,7 +98,8 @@ export default function SelectedTimePeriod() {
 
   console.log(router.query);
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex flex-col items-center justify-center h-screen">
+      <h2 className="text-4xl font-bold">Choose a location</h2>
       <ScrollLocations period={router.query.period as string} />
     </div>
   );

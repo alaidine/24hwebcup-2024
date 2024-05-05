@@ -127,6 +127,10 @@ export default function Booking() {
 
   console.log(booking);
 
+  if (!booking) {
+    return null;
+  }
+
   const period = booking[0];
   const location = booking[1];
   const timePoint = booking[2];
